@@ -28,11 +28,11 @@ android {
     }
 
     buildTypes {
-        /*debug {
-            buildConfigField("String", "BASE_URL", "\"https://api.gameofthrones.xyz/v1/\"")
-        }*/
+        debug {
+            buildConfigField("String", "BASE_URL", "\"https://newsapi.org/v2/\"")
+        }
         release {
-            //buildConfigField("String", "BASE_URL", "\"https://api.gameofthrones.xyz/v1/\"")
+            buildConfigField("String", "BASE_URL", "\"https://newsapi.org/v2/\"")
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -72,6 +72,8 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.dagger)
     kapt(libs.daggerCompiler)
+    implementation(libs.hilt)
+    implementation(libs.navCompose)
     implementation(libs.bundles.networking)
 
     testImplementation(libs.junit)

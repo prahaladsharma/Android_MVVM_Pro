@@ -12,6 +12,8 @@ retrofit = "2.9.0"
 okhttp = "4.10.0"
 gson = "2.11.0"
 dagger = "2.51.1"
+navComposeVersion = "2.7.7"
+hiltNavVersion = "1.2.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -35,6 +37,8 @@ androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-man
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 dagger = { group = "com.google.dagger", name = "hilt-android", version.ref = "dagger" }
 daggerCompiler = { group =  "com.google.dagger", name = "hilt-compiler", version.ref = "dagger"}
+navCompose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navComposeVersion" }
+hilt = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltNavVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
