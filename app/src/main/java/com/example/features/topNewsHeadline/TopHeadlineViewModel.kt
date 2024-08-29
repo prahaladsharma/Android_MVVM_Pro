@@ -24,6 +24,7 @@ class TopHeadlineViewModel @Inject constructor(
         viewModelScope.launch {
             when(intent){
                 is NewsIntent.LoadTopNews -> getTopNew()
+                else -> {}
             }
         }
     }
