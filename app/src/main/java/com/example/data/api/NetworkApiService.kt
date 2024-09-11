@@ -1,6 +1,7 @@
 package com.example.data.api
 
 import com.example.data.COUNTRY
+import com.example.data.SOURCES
 import com.example.data.TOP_HEADLINES
 import com.example.data.TOP_HEADLINES_SOURCES
 import com.example.data.model.TopHeadlinesResponseDTO
@@ -15,6 +16,9 @@ interface NetworkApiService {
     suspend fun getTopHeadlines(@Query(COUNTRY) country: String): TopHeadlinesResponseDTO
 
     @GET(TOP_HEADLINES_SOURCES)
-    suspend fun getNesFromSources(@Query("sources") sources: String): TopHeadlinesResponseDTO
+    suspend fun getNesFromSources(
+        @Query(SOURCES) sources: String,
+        @Query("apiKey") apiKey: String,
+    ): TopHeadlinesResponseDTO
 
 }

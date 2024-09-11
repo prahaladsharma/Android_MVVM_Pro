@@ -58,7 +58,7 @@ fun RenderItem(
             )
             .clickable(onClick = {
                 onHouseListScreen(
-                    NewsIntent.onListSelected(article.url)
+                    NewsIntent.onListSelected(article.source.name)
                 )
             }),
         elevation = CardDefaults.cardElevation(defaultElevation = dimensionResource(id = R.dimen.ten_dp)),

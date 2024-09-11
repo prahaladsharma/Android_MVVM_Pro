@@ -23,7 +23,11 @@ class TopHeadlineViewModel @Inject constructor(
     fun handleIntent(intent: NewsIntent){
         viewModelScope.launch {
             when(intent){
-                is NewsIntent.LoadTopNews -> getTopNew()
+                is NewsIntent.LoadTopNews -> {
+                    (_uiState.value as? UiState.Loading)?.let {
+                        getTopNew()
+                    }
+                }
                 else -> {}
             }
         }
