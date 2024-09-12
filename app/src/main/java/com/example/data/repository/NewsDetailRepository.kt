@@ -1,7 +1,6 @@
 package com.example.data.repository
 
 import com.example.data.api.NetworkApiService
-import com.example.data.apiKey
 import com.example.data.model.ArticleDTO
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -15,7 +14,7 @@ class NewsDetailRepository @Inject constructor(
 ) {
     fun getNewsDetail(id: String): Flow<List<ArticleDTO>> {
         return flow {
-            emit(networkApiService.getNesFromSources(id, apiKey))
+            emit(networkApiService.getNewsFromSources(id))
         }.map {
             it.articles
         }
