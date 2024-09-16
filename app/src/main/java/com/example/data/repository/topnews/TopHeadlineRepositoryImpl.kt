@@ -1,23 +1,21 @@
-package com.example.data.repository
+package com.example.data.repository.topnews
 
 import com.example.data.api.NetworkApiService
 import com.example.data.model.ArticleDTO
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class TopHeadlineRepository @Inject constructor(
+class TopHeadlineRepositoryImpl @Inject constructor(
     private val networkApiService: NetworkApiService
-) {
+) : TopHeadlineRepository {
 
-    fun getTopHeadlines(country: String): Flow<List<ArticleDTO>> {
+    override fun getTopHeadlines(country: String): Flow<List<ArticleDTO>> {
         return flow {
-            emit(networkApiService.getTopHeadlines(country))
-        }.map {
-            it.articles
+            val response = networkApiService.getTopHeadlines(country)
+            emit(response.articles)
         }
     }
 

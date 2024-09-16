@@ -1,22 +1,22 @@
-package com.example.data.repository
+package com.example.data.repository.newsDetails
 
 import com.example.data.api.NetworkApiService
 import com.example.data.model.ArticleDTO
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class NewsDetailRepository @Inject constructor(
+class NewsDetailRepositoryImpl @Inject constructor(
     private val networkApiService: NetworkApiService
-) {
-    fun getNewsDetail(id: String): Flow<List<ArticleDTO>> {
+): NewsDetailRepository {
+
+    override fun getNewsDetail(id: String): Flow<List<ArticleDTO>> {
         return flow {
-            emit(networkApiService.getNewsFromSources(id))
-        }.map {
-            it.articles
+            val response = networkApiService.getNewsFromSources(id)
+            emit(response.articles)
         }
     }
+
 }

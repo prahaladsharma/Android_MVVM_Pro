@@ -1,6 +1,5 @@
 package com.example.features.topNewsHeadline
 
-import android.graphics.Paint.Align
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -17,7 +16,6 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.dimensionResource
@@ -30,22 +28,22 @@ import com.example.ui.theme.widget.TextTitle
 @Composable
 fun NewsItem(
     articles: List<ArticleDTO>,
-    onHouseListScreen: (intent: NewsIntent) -> Unit,
+    onItemSelected: (intent: NewsIntent) -> Unit,
 ) {
     LazyColumn {
         items(articles) { item ->
             RenderItem(
                 article = item,
-                onHouseListScreen,
+                onItemSelected,
             )
         }
     }
 }
 
 @Composable
-fun RenderItem(
+private fun RenderItem(
     article: ArticleDTO,
-    onHouseListScreen: (intent: NewsIntent) -> Unit,
+    onItemSelected: (intent: NewsIntent) -> Unit,
 ) {
     val padding = dimensionResource(id = R.dimen.sixteen_dp)
     val cardPadding = dimensionResource(id = R.dimen.eight_dp)
@@ -57,7 +55,7 @@ fun RenderItem(
                 RoundedCornerShape(padding)
             )
             .clickable(onClick = {
-                onHouseListScreen(
+                onItemSelected(
                     NewsIntent.onListSelected(article.source.name)
                 )
             }),

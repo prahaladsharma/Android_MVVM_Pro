@@ -1,11 +1,11 @@
 package com.example.data.api
 
 import com.example.BuildConfig
-import com.example.data.COUNTRY
-import com.example.data.SOURCES
-import com.example.data.TOP_HEADLINES
-import com.example.data.TOP_HEADLINES_SOURCES
 import com.example.data.model.TopHeadlinesResponseDTO
+import com.example.util.Constants.COUNTRY
+import com.example.util.Constants.SOURCES
+import com.example.util.Constants.TOP_HEADLINES
+import com.example.util.Constants.TOP_HEADLINES_SOURCES
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Query

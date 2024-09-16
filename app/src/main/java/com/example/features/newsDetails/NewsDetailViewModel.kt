@@ -3,7 +3,7 @@ package com.example.features.newsDetails
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.data.model.ArticleDTO
-import com.example.data.repository.NewsDetailRepository
+import com.example.data.repository.newsDetails.NewsDetailRepositoryImpl
 import com.example.features.base.intent.NewsDetailIntent
 import com.example.features.base.state.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class NewsDetailViewModel @Inject constructor(
-    private val newsDetailRepository: NewsDetailRepository
+    private val newsDetailRepository: NewsDetailRepositoryImpl
 ) : ViewModel() {
     private val _uiState = MutableStateFlow<UiState<List<ArticleDTO>>>(UiState.Loading)
     val uiState: StateFlow<UiState<List<ArticleDTO>>> = _uiState

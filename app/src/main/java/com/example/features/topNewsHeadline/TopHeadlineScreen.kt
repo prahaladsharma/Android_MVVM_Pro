@@ -3,6 +3,7 @@ package com.example.features.topNewsHeadline
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.R
@@ -18,15 +19,15 @@ fun TopHeadlineScreen(
     viewModel: TopHeadlineViewModel = hiltViewModel(),
     navigateToDetail: (id: String) -> Unit
 ){
-    val state = viewModel.uiState.collectAsState().value
+    val state by viewModel.uiState.collectAsState()
 
     LaunchedEffect(Unit) {
-        viewModel.handleIntent(NewsIntent.LoadTopNews)
+        viewModel.handleIntent(NewsIntent.LoadTopNews, countryCode = "US")
     }
 
     NewsScreenRendering(
         state = state,
-        onHouseListScreen = { newsIntent ->
+        onItemSelected = { newsIntent ->
             (newsIntent as? NewsIntent.onListSelected)
                 ?.let { navigateToDetail(it.id) }
         }
@@ -35,9 +36,9 @@ fun TopHeadlineScreen(
 }
 
 @Composable
-fun NewsScreenRendering(
+private fun NewsScreenRendering(
     state: UiState<List<ArticleDTO>>,
-    onHouseListScreen: (intent: NewsIntent) -> Unit
+    onItemSelected: (NewsIntent) -> Unit
 ) {
     BaseScreen(title = stringResource(R.string.home)) {
         when (state) {
@@ -48,11 +49,11 @@ fun NewsScreenRendering(
             is UiState.Success ->{
                 NewsItem(
                     articles = state.data,
-                    onHouseListScreen = onHouseListScreen
+                    onItemSelected = onItemSelected,
                 )
             }
             is UiState.Error -> {
-                ErrorContent(state.message)
+                ErrorContent(message = state.message)
             }
         }
 
