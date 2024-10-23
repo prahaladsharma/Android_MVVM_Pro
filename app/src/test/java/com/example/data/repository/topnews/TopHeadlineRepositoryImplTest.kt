@@ -3,6 +3,7 @@ package com.example.data.repository.topnews
 import app.cash.turbine.test
 import com.example.data.api.NetworkApiService
 import com.example.data.model.ArticleDTO
+import com.example.data.model.SourceDTO
 import com.example.data.model.TopHeadlinesResponseDTO
 import junit.framework.TestCase.assertEquals
 import org.junit.Before
@@ -27,11 +28,18 @@ class TopHeadlineRepositoryImplTest{
         topHeadlineRepository = TopHeadlineRepositoryImpl(mockApiService)
     }
 
-    /*@Test
-    fun `test getTopHeadlines emits articles from api response`(): Unit = runTest {
-        // Given: Mock API response
-        val mockArticle = ArticleDTO("Sample Title", "Sample Description", "Sample Url")
-        val mockResponse = TopHeadlinesResponseDTO(listOf(mockArticle))
+    @Test
+    fun `test getTopHeadlines emits list of articles`() = runTest {
+        // Given: Mock API response with a list of ArticleDTOs
+        val mockSource = SourceDTO("sourceId", "sourceName")
+        val mockArticle = ArticleDTO(
+            title = "Sample Title",
+            description = "Sample Description",
+            url = "https://sample.url",
+            imageUrl = "https://sample.url/image.jpg",
+            source = mockSource
+        )
+        val mockResponse = TopHeadlinesResponseDTO("status", 0, listOf(mockArticle))
 
         // When: Mocking the service to return the mock response
         whenever(mockApiService.getTopHeadlines("us")).thenReturn(mockResponse)
@@ -43,13 +51,15 @@ class TopHeadlineRepositoryImplTest{
             assertEquals(1, articles.size)
             assertEquals("Sample Title", articles[0].title)
             assertEquals("Sample Description", articles[0].description)
-            assertEquals("Sample Url", articles[0].url)
+            assertEquals("https://sample.url", articles[0].url)
+            assertEquals("https://sample.url/image.jpg", articles[0].imageUrl)
+            assertEquals("sourceName", articles[0].source.name)
 
             awaitComplete()
         }
 
         // Verify that the API service method was called exactly once
         verify(mockApiService, times(1)).getTopHeadlines("us")
-    }*/
+    }
 
 }
